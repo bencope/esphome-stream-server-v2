@@ -69,7 +69,7 @@ void StreamServerComponent::accept() {
         return;
 
     socket->setblocking(false);
-    std::string identifier = socket->getpeername();
+    std::string identifier = inet_ntoa(client_addr.sin_addr);
     this->clients_.emplace_back(std::move(socket), identifier);
     ESP_LOGD(TAG, "New client connected from %s", identifier.c_str());
 }
